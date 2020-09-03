@@ -29,7 +29,6 @@ const appointments = [
 
 
 export default function Application(props) {
-
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -67,19 +66,6 @@ export default function Application(props) {
     );
   });
 
-  const schedule = appointments.map((appointment) => {
-    const interview = getInterview(state, appointments.interview);
-    const interviewers = getInterviewersForDay(state, state.day);
-    return (
-      <Appointment
-        key={appointment.id}
-        id={appointment.id}
-        time={appointment.time}
-        interview={interview}
-      />
-    );
-  });
-
   return (
     <main className="layout">
       <section className="sidebar">
@@ -102,7 +88,8 @@ export default function Application(props) {
       <section className="schedule">
         {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
         {appointments}
-        <Appointment key="last" time={"5pm"} />
+        <Appointment key="last" time={"5pm"}
+        />
       </section>
     </main>
 
