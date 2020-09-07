@@ -25,6 +25,20 @@ export default function useApplicationData(props) {
   }, []);
 
   function bookInterview(id, interview) {
+    let dayIndex = undefined;
+    const days = [...state.days];
+    // console.log(days);
+    days.forEach((day, index) => {
+      if (day.appointments.includes(id)) {
+        dayIndex = index;
+      }
+    });
+    if (!state.appointments[id].interview) {
+      days[dayIndex].spots--
+    };
+    // console.log(days[dayIndex]);
+    // console.log(state.appointments[id]);
+
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -37,13 +51,25 @@ export default function useApplicationData(props) {
       .then(() => {
         setState({
           ...state,
-          appointments
+          appointments, days
         });
         return true;
       });
   }
 
   function cancelInterview(id) {
+    let dayIndex = undefined;
+    const days = [...state.days];
+
+    days.forEach((day, index) => {
+      if (day.appointments.includes(id)) {
+        dayIndex = index;
+      }
+    });
+    if (state.appointments[id].interview) {
+      days[dayIndex].spots++
+    };
+
     const appointment = {
       ...state.appointments[id],
       interview: null
