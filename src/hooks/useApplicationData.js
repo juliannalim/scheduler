@@ -66,6 +66,7 @@ export default function useApplicationData(props) {
         dayIndex = index;
       }
     });
+
     if (state.appointments[id].interview) {
       days[dayIndex].spots++
     };
